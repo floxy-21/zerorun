@@ -46,6 +46,7 @@ deterministic Linux/amd64 test partitions and frequent agent-driven edits.
 - [Read the technical evidence](https://zero-run.onrender.com/evidence)
 - [Request a private pilot](https://zero-run.onrender.com/contact)
 - [Open a workload-fit issue](https://github.com/floxy-21/zerorun/issues/new?template=workload-fit.yml)
+- [Ask a public question](https://github.com/floxy-21/zerorun/discussions)
 
 Do not post credentials, access tokens, confidential source code, or sensitive
 repository details in a public issue.
