@@ -1,0 +1,55 @@
+name: Workload fit
+description: Share a public, non-sensitive workload shape for a potential ZeroRun pilot.
+title: "Workload fit: "
+labels:
+  - workload-fit
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include credentials, confidential source code, private repository URLs, or sensitive company information. Use the private pilot form for non-public details.
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Typical expensive target runtime
+      options:
+        - 30–60 seconds
+        - 1–5 minutes
+        - 5–15 minutes
+        - 15–60 minutes
+        - 60+ minutes
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Linux/amd64
+        - Other or mixed
+    validations:
+      required: true
+  - type: textarea
+    id: target
+    attributes:
+      label: Deterministic target
+      description: Describe the test partition or check at a high level.
+    validations:
+      required: true
+  - type: textarea
+    id: loop
+    attributes:
+      label: Repeated workflow
+      description: How often do agents or CI rerun this target after small edits?
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-data confirmation
+      options:
+        - label: I have not included credentials, confidential source code, or sensitive repository details.
+          required: true
+  - type: markdown
+    attributes:
+      value: "For a private discussion, use https://zero-run.onrender.com/contact."
