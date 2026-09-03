@@ -44,6 +44,8 @@ See [docs/BOUNDARY.md](docs/BOUNDARY.md).
 
 The v0.4 runtime implementation is proprietary and distributed to approved design partners as a compiled Linux/amd64 pilot package. Pilot users do **not** need access to the private implementation repository and do not upload their source code to ZeroRun.
 
+**The binary is intentionally not published in this public repository.** Approved participants receive `zerorun-pilot-linux-amd64.tar.gz` and its `.sha256` checksum privately after workload review.
+
 Typical lifecycle:
 
 ```text
