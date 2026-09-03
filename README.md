@@ -1,61 +1,101 @@
 # ZeroRun
 
-Fail-closed deterministic test reuse for AI coding agents and CI.
+Fail-closed deterministic test-result reuse for AI coding agents and CI.
 
-ZeroRun is designed for one narrow decision after a code edit: may a previously
-passing deterministic test result be reused, or must the target execute fresh?
-Reuse is eligible only when the reviewed source closure, pinned runtime, command,
-policy, declared environment, and Linux/amd64 platform identity match. Changed,
-unknown, unsupported, or conflicting evidence fails closed.
+ZeroRun answers one narrow question after a code edit: can a previously passing deterministic test result be reused defensibly, or must the target execute fresh?
 
-## Current evidence
+Reuse is eligible only inside a reviewed boundary. Changed, unknown, unsupported, or conflicting evidence fails closed and executes fresh or is quarantined.
 
-The internal technical MVP passed on 30 historical merged edits across pytest and
-SymPy:
+## ZeroRun v0.4 status
 
-- pytest p95 reduction: **45.96%** (50.40s direct to 27.23s ZeroRun)
-- SymPy p95 reduction: **33.52%** (134.26s direct to 89.26s ZeroRun)
-- pytest same-runner compute efficiency: **3.062x**
-- observed stale-success events: **0**
-- observed shadow mismatches: **0**
-- observed cache conflicts: **0**
+**Internal technical qualification: PASS.**
 
-These are workload-specific internal results, not universal guarantees. The 5x
-target, 100 real external requests, design-partner proof, paying customers, and
-commercial validation remain open. See [EVIDENCE.md](EVIDENCE.md).
+ZeroRun v0.4 cleared the unchanged formal performance gates on historical merged edits across pytest and SymPy:
 
-## Supported launch boundary
+| Workload | Corpus | Same-runner compute efficiency | p95 reduction | Observed safety failures |
+| --- | ---: | ---: | ---: | ---: |
+| pytest | 10 merged patches | **8.1657×** | **78.415%** | **0** |
+| SymPy | 20 merged patches | **5.4545×** | **78.309%** | **0** |
+
+The formal gates were at least **5× same-runner compute efficiency**, at least **50% p95 reduction**, and zero observed stale-success/shadow-mismatch/cache-conflict events in the accepted evidence.
+
+These are workload-specific **internal historical qualification results**, not universal speed guarantees or external production proof. Real-user reliability, setup friction, retention, willingness to pay, and commercial validation remain open.
+
+See [EVIDENCE.md](EVIDENCE.md) for the claim boundary and provenance summary.
+
+## Supported v0.4 boundary
 
 - Linux/amd64
 - immutable OCI runtime image pinned by digest
 - explicit operator-reviewed source closure
-- deterministic result-only launch targets
-- commands suppress captured streams and publish no output artifacts
-- read-only checkout and no network during execution
-- declared environment included in the reuse identity
-- uncertainty executes fresh; conflicting verification is quarantined
+- deterministic result-only targets
+- read-only checkout
+- no network during task execution
+- declared environment included in reuse identity
+- exact command/policy/runtime identity
+- uncertainty executes fresh
+- conflicting fresh verification quarantines a cached success
 
-ZeroRun does not infer or prove that a source closure is complete. The current
-MVP requires an explicit reviewed closure. See [docs/BOUNDARY.md](docs/BOUNDARY.md).
+ZeroRun does **not** automatically prove that a declared source closure is complete. `closure_reviewed: true` remains an explicit review assertion.
 
-## Try a real workload
+See [docs/BOUNDARY.md](docs/BOUNDARY.md).
 
-ZeroRun is recruiting a small number of design partners with expensive,
-deterministic Linux/amd64 test partitions and frequent agent-driven edits.
+## Private pilot
 
-- [Read the technical evidence](https://zero-run.onrender.com/evidence)
-- [Request a private pilot](https://zero-run.onrender.com/contact)
-- [Open a workload-fit issue](https://github.com/floxy-21/zerorun/issues/new?template=workload-fit.yml)
-- [Ask a public question](https://github.com/floxy-21/zerorun/discussions)
+The v0.4 runtime implementation is proprietary and distributed to approved design partners as a compiled Linux/amd64 pilot package. Pilot users do **not** need access to the private implementation repository and do not upload their source code to ZeroRun.
 
-Do not post credentials, access tokens, confidential source code, or sensitive
-repository details in a public issue.
+Typical lifecycle:
 
-## Publication scope
+```text
+agent edit
+   ↓
+zerorun run <task>
+   ↓
+MISS_EXECUTED or HIT_REUSED
+   ↓
+periodic zerorun run <task> --verify
+```
 
-This repository is the curated public product surface. It contains the product
-boundary, measured claim scope, public roadmap, and feedback channel. The runtime
-implementation, internal working history, experiments, and raw receipts remain
-private pending source, secrets, license/IP, and evidence review.
+A healthy initial cache lifecycle is:
 
-Website: [zero-run.onrender.com](https://zero-run.onrender.com/)
+```text
+MISS_EXECUTED
+HIT_REUSED
+VERIFY_MATCH
+```
+
+Public installation/onboarding guidance: [docs/PILOT.md](docs/PILOT.md).
+
+## Public vs private repositories
+
+This repository, **`floxy-21/zerorun`**, is the public product surface. It contains:
+
+- product explanation
+- supported safety boundary
+- sanitized evidence summary
+- pilot onboarding guidance
+- public roadmap
+- security/contact guidance
+
+The runtime implementation, benchmark harnesses, internal experiments, raw qualification receipts, and private pilot build system belong in a separate private implementation repository.
+
+## Next milestone
+
+The next meaningful proof is external usage:
+
+1. onboard 2–5 real developers or teams;
+2. collect at least 100 genuine external edit → test requests under the normal safety boundary;
+3. record reuse, misses/bypasses, verification outcomes, p50/p95, compute savings, setup friction, and support burden;
+4. preserve failures and broad/shared edits rather than selecting only favorable cases;
+5. use those traces to evaluate customer economics and willingness to pay.
+
+See [docs/ROADMAP.md](docs/ROADMAP.md).
+
+## Links
+
+- Website: https://zero-run.onrender.com/
+- Technical evidence: https://zero-run.onrender.com/evidence
+- Private pilot: https://zero-run.onrender.com/contact
+- Security: [SECURITY.md](SECURITY.md)
+
+Do not post credentials, access tokens, confidential source code, or sensitive repository details in a public issue.
