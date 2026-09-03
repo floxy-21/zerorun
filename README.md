@@ -21,7 +21,7 @@ The formal gates were at least **5× same-runner compute efficiency**, at least 
 
 These are workload-specific **internal historical qualification results**, not universal speed guarantees or external production proof. Real-user reliability, setup friction, retention, willingness to pay, and commercial validation remain open.
 
-See [EVIDENCE.md](EVIDENCE.md) for the claim boundary and provenance summary.
+See [EVIDENCE.md](EVIDENCE.md) for the claim boundary and provenance summary and [docs/RELEASE_V0.4.0.md](docs/RELEASE_V0.4.0.md) for the v0.4.0 release note.
 
 ## Supported v0.4 boundary
 
