@@ -2,6 +2,8 @@
 
 ZeroRun v0.4 is currently distributed to approved design partners as a compiled Linux/amd64 evaluation package. The runtime source is not required for participation.
 
+**The binary is intentionally not published in this public repository.** Approved participants receive `zerorun-pilot-linux-amd64.tar.gz` and `zerorun-pilot-linux-amd64.tar.gz.sha256` through a private channel after the workload boundary is reviewed.
+
 ## Workload fit
 
 A good first pilot target is:
